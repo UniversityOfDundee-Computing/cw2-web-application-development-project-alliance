@@ -34,7 +34,7 @@ tsParticles.load("tsparticles", {
   },
   mode:{
     attract: {
-      distance: 200,
+      distance: 500,
       duration: 0.4,
       speed: 1
     }
