@@ -1,3 +1,4 @@
+// this are the list of genres and their respective emojis
 const genres = [
   { id: 1, genre: "Action", emoji: "🔫" },
   { id: 2, genre: "Adventure", emoji: "🗺️" },
@@ -16,6 +17,7 @@ const filterMovies = (genre) => {
   console.log(genre);
 };
 
+// loop through the genres array and create buttons for each genre
 genres.forEach((genre) => {
   container.innerHTML += `
       <div class="w-full flex flex-row justify-center items-center relative group">
@@ -28,3 +30,20 @@ genres.forEach((genre) => {
       </div>
     `;
 });
+
+// particles.js configuration
+tsParticles.load("tsparticles", {
+  particles: {
+    number: { value: 50 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1 },
+    line_linked: { enable: true, distance: 150 },
+  },
+  interactivity: {
+    events: { onhover: { enable: true, mode: "repulse" } },
+  },
+  background: {
+    color: "#000"
+  }
+});
+
