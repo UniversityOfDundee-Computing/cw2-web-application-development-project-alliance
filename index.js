@@ -6,7 +6,7 @@ const genres = [
   { id: 5, genre: "Horror", emoji: "👻" },
   { id: 6, genre: "Science Fiction", emoji: "🚀" },
   { id: 7, genre: "Fantasy", emoji: "🐉" },
-  { id: 8, genre: "Romance", emoji: "💋" },
+  { id: 8, genre: "Romance", emoji: "❤️" },
 ];
 
 const container = document.getElementById("buttonContainer");
@@ -18,10 +18,13 @@ const filterMovies = (genre) => {
 
 genres.forEach((genre) => {
   container.innerHTML += `
-      <div class="w-full flex flex-row justify-center items-center h-32">
-        <button class="text-7xl hover:bg-gray-500 p-5 rounded-full" onclick="filterMovies('${genre.genre}')">
+      <div class="w-full flex flex-row justify-center items-center relative group">
+        <button class="text-7xl hover:bg-gray-500 h-full w-full p-5 rounded-full" onclick="filterMovies('${genre.genre}')">
           ${genre.emoji}
-        </button>
+          <br/>
+          <span class=" opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm text-white font-bold">${genre.genre}</span>
+          </button>
+
       </div>
     `;
 });
