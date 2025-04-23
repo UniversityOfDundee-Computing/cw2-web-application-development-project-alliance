@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--index style-->
-    <link rel="stylesheet" href="index.css">
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Flowbite CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <title>Blurred Background Image</title>
-  </head>
-  <body class="m-0 p-0">
-    <header>
-      <nav></nav>
-    </header>
-    <main>
-      <section id = "background" class="bg-cover bg-center min-h-screen flex items-center justify-center">
-        <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12">
-          <div id="buttonContainer" class="flex justify-center"></div>
-        </section>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--index style-->
+  <link rel="stylesheet" href="index.css">
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Flowbite CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <title>Blurred Background Image</title>
+</head>
+
+<body class="m-0 p-0">
+  <div id="tsparticles" class="absolute inset-0 -z-10"></div>
+  <header>
+    <nav></nav>
+  </header>
+  <main>
+    <section class="bg-cover bg-center min-h-screen flex items-center justify-center">
+      <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12">
+        <div id="buttonContainer" class="flex justify-center"></div>
       </section>
-    </main>
-    <section></section>
-    <footer></footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <script src="index.js"></script>
-  </body>
+    </section>
+  </main>
+  <section></section>
+  <footer></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
 </html>
