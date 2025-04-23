@@ -40,7 +40,14 @@ tsParticles.load("tsparticles", {
     line_linked: { enable: true, distance: 150 },
   },
   interactivity: {
-    events: { onhover: { enable: true, mode: "repulse" } },
+    events: { onhover: { enable: true, mode: "attract" } },
+  },
+  mode:{
+    attract: {
+      distance: 500,
+      duration: 0.4,
+      speed: 1
+    }
   },
   background: {
     color: "#000"
