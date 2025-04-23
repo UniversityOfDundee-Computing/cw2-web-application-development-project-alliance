@@ -12,6 +12,10 @@ const genres = [
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
 
+const filterMovies = (genre) => {
+  console.log(genre);
+};
+
 genres.forEach((genre) => {
   container.innerHTML += `
       <div class="w-full flex flex-row justify-center items-center h-32">
