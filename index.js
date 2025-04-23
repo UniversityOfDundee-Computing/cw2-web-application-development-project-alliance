@@ -21,3 +21,19 @@ genres.forEach((genre) => {
       </div>
     `;
 });
+
+tsParticles.load("tsparticles", {
+  particles: {
+    number: { value: 50 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1 },
+    line_linked: { enable: true, distance: 150 },
+  },
+  interactivity: {
+    events: { onhover: { enable: true, mode: "repulse" } },
+  },
+  background: {
+    color: "#000"
+  }
+});
+
