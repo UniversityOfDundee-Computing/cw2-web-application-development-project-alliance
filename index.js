@@ -1,14 +1,15 @@
 // this are the list of genres and their respective emojis
 const genres = [
-  { id: 1, genre: "Action", emoji: "🔫" },
-  { id: 2, genre: "Adventure", emoji: "🗺️" },
-  { id: 3, genre: "Comedy", emoji: "😂" },
-  { id: 4, genre: "Drama", emoji: "😢" },
-  { id: 5, genre: "Horror", emoji: "👻" },
-  { id: 6, genre: "Science Fiction", emoji: "🚀" },
-  { id: 7, genre: "Fantasy", emoji: "🐉" },
-  { id: 8, genre: "Romance", emoji: "❤️" },
+  { id: 28, genre: "Action", emoji: "🔫" },
+  { id: 12, genre: "Adventure", emoji: "🗺️" },
+  { id: 35, genre: "Comedy", emoji: "😂" },
+  { id: 18, genre: "Drama", emoji: "😢" },
+  { id: 27, genre: "Horror", emoji: "👻" },
+  { id: 878, genre: "Science Fiction", emoji: "🚀" },
+  { id: 14, genre: "Fantasy", emoji: "🐉" },
+  { id: 10749, genre: "Romance", emoji: "❤️" },
 ];
+
 
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
@@ -42,15 +43,14 @@ tsParticles.load("tsparticles", {
   interactivity: {
     events: { onhover: { enable: true, mode: "attract" } },
   },
-  mode:{
+  mode: {
     attract: {
       distance: 500,
       duration: 0.4,
-      speed: 1
-    }
+      speed: 1,
+    },
   },
   background: {
-    color: "#000"
-  }
+    color: "#000",
+  },
 });
-
