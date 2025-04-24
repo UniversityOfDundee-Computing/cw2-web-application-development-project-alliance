@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--index style-->
+    <link rel="stylesheet" href="index.css" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Blurred Background Image</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!--index style-->
-  <link rel="stylesheet" href="index.css" />
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Flowbite CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Blurred Background Image</title>
-</head>
+  <body class="m-0 p-0">
+    <div id="tsparticles" class="absolute inset-0 -z-10"></div>
+    <header>
+      <nav></nav>
+    </header>
+    <main
+      class="bg-cover bg-center min-h-screen flex items-center justify-center"
+    >
+      <section
+        class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12"
+      >
+        <div id="buttonContainer" class="flex justify-center"></div>
 
-<body class="m-0 p-0">
-  <div id="tsparticles" class="absolute inset-0 -z-10"></div>
-  <header>
-    <nav></nav>
-  </header>
-  <main class="bg-cover bg-center min-h-screen flex items-center justify-center">
-    <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12">
-      <div id="buttonContainer" class="flex justify-center"></div>
+        <div class="flex justify-center items-center">
+          <i
+            class="fa-solid fa-arrow-up fa-beat text-4xl text-gray-500 text-white"
+          ></i>
+        </div>
+      </section>
+    </main>
+    <section></section>
+    <footer></footer>
 
-      <div class="flex justify-center items-center">
-        <i class="fa-solid fa-arrow-up fa-beat text-4xl text-gray-500 text-white"></i>
-      </div>
-    </section>
-  </main>
-  <section></section>
-  <footer></footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-  <script src="index.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="index.js"></script>
+  </body>
 </html>
