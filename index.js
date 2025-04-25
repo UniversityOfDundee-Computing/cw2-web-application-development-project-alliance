@@ -10,11 +10,16 @@ const genres = [
   { id: 10749, genre: "Romance", emoji: "❤️" },
 ];
 
+// generate a random page number between 1 and 72
+const randomPage = Math.floor(Math.random() * 72) + 1;
+
+
+
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
 
 const filterMovies = (genre) => {
-  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
+  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${genre}`;
   const options = {
     method: "GET",
     headers: {
@@ -55,7 +60,12 @@ const filterMovies = (genre) => {
         movieOverview.textContent = movie.overview;
 
         const movieImage = document.createElement("img");
-        movieImage.classList.add("w-[300px]", "h-[300px]", "rounded-lg", "cursor-pointer");
+        movieImage.classList.add(
+          "w-[300px]",
+          "h-[300px]",
+          "rounded-lg",
+          "cursor-pointer"
+        );
         movieImage.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
         // movieCard.appendChild(movieTitle);
