@@ -1,13 +1,23 @@
-// this are the list of genres and their respective emojis
-const genres = [
-  { id: 28, genre: "Action", emoji: "🔫" },
-  { id: 12, genre: "Adventure", emoji: "🗺️" },
-  { id: 35, genre: "Comedy", emoji: "😂" },
-  { id: 18, genre: "Drama", emoji: "😢" },
-  { id: 27, genre: "Horror", emoji: "👻" },
-  { id: 878, genre: "Science Fiction", emoji: "🚀" },
-  { id: 14, genre: "Fantasy", emoji: "🐉" },
-  { id: 10749, genre: "Romance", emoji: "❤️" },
+const moviesEmojis = [
+  { id: 28, name: "Action", emoji: "💥" },
+  { id: 12, name: "Adventure", emoji: "🧭" },
+  { id: 16, name: "Animation", emoji: "🎨" },
+  { id: 35, name: "Comedy", emoji: "😂" },
+  { id: 80, name: "Crime", emoji: "🕵️‍♂️" },
+  { id: 99, name: "Documentary", emoji: "🎥" },
+  { id: 18, name: "Drama", emoji: "🎭" },
+  { id: 10751, name: "Family", emoji: "👨‍👩‍👧‍👦" },
+  { id: 14, name: "Fantasy", emoji: "🧙‍♂️" },
+  { id: 36, name: "History", emoji: "📜" },
+  { id: 27, name: "Horror", emoji: "👻" },
+  { id: 10402, name: "Music", emoji: "🎵" },
+  { id: 9648, name: "Mystery", emoji: "🕵️‍♀️" },
+  { id: 10749, name: "Romance", emoji: "❤️" },
+  { id: 878, name: "Science Fiction", emoji: "👽" },
+  { id: 10770, name: "TV Movie", emoji: "📺" },
+  { id: 53, name: "Thriller", emoji: "🔪" },
+  { id: 10752, name: "War", emoji: "⚔️" },
+  { id: 37, name: "Western", emoji: "🤠" },
 ];
 
 const container = document.getElementById("buttonContainer");
@@ -71,92 +81,6 @@ const poppingFnc = (movie) => {
   movieModal.show();
 };
 
-const filterMovies = (genre) => {
-  // generate a random page number between 1 and 72
-  const randomPage = Math.floor(Math.random() * 72) + 1;
-
-  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${genre}`;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NTgzZmI3ZjBiNTYxOWYwZGFmYmExYzAzNzkyM2EwMyIsIm5iZiI6MTY5MjczMDU4Ni42NzcsInN1YiI6IjY0ZTUwNGRhYzNjODkxMDBlMzVlYjNmNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QEhEB_vVgFSZ-9E5ACDJ54vsmxT9PMBwXqo7V5GuklY",
-    },
-  };
-
-  const container = document.getElementById("movieList");
-  container.innerHTML = ""; // Clear previous results
-
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => {
-      const movies = json.results;
-
-      movies.forEach((movie) => {
-        const movieCard = document.createElement("div");
-        movieCard.classList.add(
-          // "w-full",
-          "flex",
-          "flex-col",
-          "justify-center",
-          "items-center",
-          // "bg-gray-800",
-          "rounded-lg",
-          "p-5",
-          "mt-5"
-        );
-        /* const movieTitle = document.createElement("h2");
-        movieTitle.classList.add("text-white", "text-3xl", "font-bold");
-        movieTitle.textContent = movie.title;*/
-
-        /* const movieOverview = document.createElement("p");
-        movieOverview.classList.add("text-white", "text-lg");
-        movieOverview.textContent = movie.overview;*/
-
-        const movieImage = document.createElement("img");
-        movieImage.classList.add(
-          "w-[220px]",
-          "h-[330px]",
-          "rounded-lg",
-          "cursor-pointer"
-        );
-        movieImage.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
-        //use to show modal upon image click
-        movieImage.addEventListener("click", () => {
-          console.log(`Clicked on: ${movie.title}`);
-          // You can call another function here if you want to show more info or do something fancy
-          poppingFnc(movie);
-        });
-
-        // movieCard.appendChild(movieTitle);
-        // movieCard.appendChild(movieOverview);
-        container.appendChild(movieCard);
-        movieCard.appendChild(movieImage);
-      });
-    })
-    .catch((err) => console.error(err));
-
-  // console.log(genre);
-
-  console.log(genre);
-};
-
-// loop through the genres array and create buttons for each genre
-genres.forEach((genre) => {
-  container.innerHTML += `
-      <div class="w-full flex flex-row justify-center items-center relative group">
-        <button class="text-7xl hover:bg-gray-500 h-full w-full p-5 rounded-full" onclick="filterMovies('${genre.id}')">
-          ${genre.emoji}
-          <br/>
-          <span class=" opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm text-white font-bold">${genre.genre}</span>
-          </button>
-
-      </div>
-    `;
-});
-
 // particles.js configuration
 tsParticles.load("tsparticles", {
   particles: {
@@ -179,3 +103,128 @@ tsParticles.load("tsparticles", {
     color: "#000",
   },
 });
+
+// const filterMovies = () => {
+// generate a random page number between 1 and 72
+const randomPage = Math.floor(Math.random() * 72) + 1;
+
+const genre = localStorage.getItem("genre");
+
+// this is for getting related genre emojis
+
+const reg = moviesEmojis.find((g) => g.id === Number(genre));
+
+document.getElementById(
+  "currentMovieList"
+).textContent = `These are the list of ${reg.name} ${reg.emoji} movies`;
+console.log(reg);
+
+const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${Number(
+  genre
+)}`;
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NTgzZmI3ZjBiNTYxOWYwZGFmYmExYzAzNzkyM2EwMyIsIm5iZiI6MTY5MjczMDU4Ni42NzcsInN1YiI6IjY0ZTUwNGRhYzNjODkxMDBlMzVlYjNmNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QEhEB_vVgFSZ-9E5ACDJ54vsmxT9PMBwXqo7V5GuklY",
+  },
+};
+
+const containers = document.getElementById("movieList");
+containers.innerHTML = ""; // Clear previous results
+
+fetch(url, options)
+  .then((res) => res.json())
+  .then((json) => {
+    const movies = json.results;
+
+    // console.log(movies);
+
+    movies.forEach((movie) => {
+      const movieCard = document.createElement("div");
+      movieCard.classList.add(
+        // "w-full",
+        "flex",
+        "flex-col",
+        "justify-center",
+        "items-center",
+        // "bg-gray-800",
+        "rounded-lg",
+        "p-5",
+        "mt-5"
+      );
+
+      const movieImage = document.createElement("img");
+      movieImage.classList.add(
+        "w-[220px]",
+        "h-[330px]",
+        "rounded-lg",
+        "cursor-pointer"
+      );
+      movieImage.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+      //use to show modal upon image click
+      movieImage.addEventListener("click", () => {
+        // console.log(`Clicked on: ${movie.title}`);
+        // You can call another function here if you want to show more info or do something fancy
+        poppingFnc(movie);
+      });
+
+      // console.log(movies);
+
+      containers.appendChild(movieCard);
+      movieCard.appendChild(movieImage);
+    });
+  })
+  .catch((err) => console.error(err));
+// };
+
+const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
+
+async function classifyGenre() {
+  const input = document.getElementById("searchInput").value;
+  const prompt = `Classify this sentence into a movie genre: "${input}". which will match only one of tmdb genres giving out the id only without any text for that genre with respect to tmdb api`;
+
+  try {
+    // api 1
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
+        "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [{ text: prompt }],
+            },
+          ],
+        }),
+      }
+    );
+
+    const data = await response.json();
+    const text =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+    document.getElementById("result").innerText = "🎭 Genre: " + text.trim();
+
+    // console.log(typeof Number(text));
+    // moves to the next page if the genre is found.
+    window.location.href = "index.html";
+
+    // console.log(text);
+
+    //
+
+    // generate a random page number between 1 and 72
+    // const randomPage = Math.floor(Math.random() * 72) + 1;
+
+    localStorage.setItem("genre", text.trim());
+  } catch (error) {
+    document.getElementById("result").innerText = "❌ Error: " + error.message;
+    console.error("API Error:", error);
+  }
+}
