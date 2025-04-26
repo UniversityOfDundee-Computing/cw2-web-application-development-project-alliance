@@ -1,3 +1,25 @@
+const moviesEmojis = [
+  { id: 28, name: "Action", emoji: "💥" },
+  { id: 12, name: "Adventure", emoji: "🧭" },
+  { id: 16, name: "Animation", emoji: "🎨" },
+  { id: 35, name: "Comedy", emoji: "😂" },
+  { id: 80, name: "Crime", emoji: "🕵️‍♂️" },
+  { id: 99, name: "Documentary", emoji: "🎥" },
+  { id: 18, name: "Drama", emoji: "🎭" },
+  { id: 10751, name: "Family", emoji: "👨‍👩‍👧‍👦" },
+  { id: 14, name: "Fantasy", emoji: "🧙‍♂️" },
+  { id: 36, name: "History", emoji: "📜" },
+  { id: 27, name: "Horror", emoji: "👻" },
+  { id: 10402, name: "Music", emoji: "🎵" },
+  { id: 9648, name: "Mystery", emoji: "🕵️‍♀️" },
+  { id: 10749, name: "Romance", emoji: "❤️" },
+  { id: 878, name: "Science Fiction", emoji: "👽" },
+  { id: 10770, name: "TV Movie", emoji: "📺" },
+  { id: 53, name: "Thriller", emoji: "🔪" },
+  { id: 10752, name: "War", emoji: "⚔️" },
+  { id: 37, name: "Western", emoji: "🤠" },
+];
+
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
 
@@ -87,6 +109,15 @@ tsParticles.load("tsparticles", {
 const randomPage = Math.floor(Math.random() * 72) + 1;
 
 const genre = localStorage.getItem("genre");
+
+// this is for getting related genre emojis
+
+const reg = moviesEmojis.find((g) => g.id === Number(genre));
+
+document.getElementById(
+  "currentMovieList"
+).textContent = `These are the list of ${reg.name} ${reg.emoji} movies`;
+console.log(reg);
 
 const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${Number(
   genre
@@ -183,13 +214,15 @@ async function classifyGenre() {
     // console.log(typeof Number(text));
     // moves to the next page if the genre is found.
     window.location.href = "index.html";
+
+    // console.log(text);
+
     //
 
     // generate a random page number between 1 and 72
-    const randomPage = Math.floor(Math.random() * 72) + 1;
+    // const randomPage = Math.floor(Math.random() * 72) + 1;
 
     localStorage.setItem("genre", text.trim());
-
   } catch (error) {
     document.getElementById("result").innerText = "❌ Error: " + error.message;
     console.error("API Error:", error);
