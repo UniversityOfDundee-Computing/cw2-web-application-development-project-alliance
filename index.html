@@ -29,14 +29,14 @@
     <nav></nav>
   </header>
   <main class="bg-cover bg-center min-h-screen flex items-center justify-center">
-    <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12 overflow-scroll">
+    <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12 overflow-y-scroll">
+      <div id="buttonContainer" class="flex justify-center sticky top-0 "></div>
       <div id="buttonContainer" class="flex justify-center sticky top-0 animate__animated animate__fadeInUp">
       </div>
       <div class="flex flex-row justify-between items-center flex-wrap">
         <button onclick="filterMovies()" class="flex justify-center items-center w-16 h-16 bg-blue-700 rounded-full text-white text-2xl">
           <i class="fa-solid fa-rotate"></i>
         </button>
-
         <h1 class="text-4xl font-bold text-gray-900" id="currentMovieList"></h1>
       </div>
 
@@ -54,7 +54,7 @@
       class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center">
       <div class="relative p-4 w-full max-w-5xl h-[75vh] overflow-y-auto">
         <!-- Modal content -->
-        <div class="relative rounded-lg shadow backdrop-blur-sm bg-white/10 ">
+        <div class="relative rounded-lg shadow backdrop-blur-sm bg-white/10">
           <!-- Header -->
           <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
             <h3 id="modalTitle" class="text-xl font-semibold text-gray-900 dark:text-white"></h3>
@@ -103,4 +103,6 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   <script src="index.js"></script>
   <script src="refresh.js"></script>
+</body>
 </html>
+
