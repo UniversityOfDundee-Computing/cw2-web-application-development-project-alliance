@@ -24,7 +24,7 @@ fetch(url, options)
   .then((json) => {
     const movies = json.results;
 
-    console.log(movies);
+    // console.log(movies);
 
     movies.forEach((movie) => {
       const movieCard = document.createElement("div");
@@ -56,7 +56,7 @@ fetch(url, options)
         poppingFnc(movie);
       });
 
-      console.log(movies, "refresh");
+      // console.log(movies, "refresh");
 
       containers.appendChild(movieCard);
       movieCard.appendChild(movieImage);

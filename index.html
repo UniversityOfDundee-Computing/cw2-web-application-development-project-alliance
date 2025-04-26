@@ -32,7 +32,13 @@
     <section class="backdrop-blur-sm bg-white/30 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12 overflow-scroll">
       <div id="buttonContainer" class="flex justify-center sticky top-0 animate__animated animate__fadeInUp">
       </div>
-      <button onclick="">refresh</button>
+      <div class="flex flex-row justify-between items-center flex-wrap">
+        <button onclick="filterMovies()" class="flex justify-center items-center w-16 h-16 bg-blue-700 rounded-full text-white text-2xl">
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+
+        <h1 class="text-4xl font-bold text-gray-900" id="currentMovieList"></h1>
+      </div>
 
       <!-- <div class="flex justify-center items-center">
         <i class="fa-solid fa-arrow-up fa-beat text-4xl text-gray-500 text-white"></i>
