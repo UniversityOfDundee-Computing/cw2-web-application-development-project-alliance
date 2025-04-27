@@ -32,6 +32,17 @@ const cleanupModal = () => {
   document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
   // Ensure body scroll is restored
   document.body.classList.remove("overflow-hidden");
+  
+  //close the video after closing the modal
+  const trailerDiv = document.querySelector("#modalTrailer");
+if (trailerDiv) {
+  const iframe = trailerDiv.querySelector("iframe");
+  if (iframe) {
+    const src = iframe.src;
+    iframe.src = ""; // clear it
+    iframe.src = src; // re-assign it to reset (this stops YouTube video!)
+  }
+}
 };
 
 //remove backdrop initiator
@@ -44,11 +55,14 @@ document.querySelectorAll("[data-modal-hide='movieModal']").forEach((btn) => {
 
 const poppingFnc = (movie) => {
   // Set title, image, and overview
+  console.log(movie);
   document.getElementById("modalTitle").textContent = movie.title;
   document.getElementById(
     "modalImage"
   ).src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   document.getElementById("modalOverview").textContent = movie.overview;
+  renderStars(Math.floor(movie.vote_average),10);
+  document.getElementById("modalReleaseDate").textContent = `Release Date : ${movie.release_date}`;
 
   // Optional: fetch trailer
   fetch(
@@ -80,6 +94,67 @@ const poppingFnc = (movie) => {
   // Show the modal (Flowbite way)
   movieModal.show();
 };
+
+
+//for favourite button inside modal
+ // Get the button and heart icon
+ const favoriteButton = document.getElementById("favoriteButton");
+ const heartIcon = document.getElementById("heartIcon");
+
+ // Set the initial content (white heart emoji)
+ heartIcon.innerHTML = "🤍"; // White heart emoji
+
+ // Toggle the heart icon when clicked
+ favoriteButton.addEventListener("click", () => {
+   if (heartIcon.innerHTML === "🤍") {
+     heartIcon.innerHTML = "❤️"; // Red heart emoji
+   } else {
+     heartIcon.innerHTML = "🤍"; // White heart emoji
+   }
+ });
+
+
+//star rendering
+function renderStars(score, outOf = 10) {
+  const ratingContainer = document.getElementById('rating');
+  ratingContainer.innerHTML = ''; // Clear previous stars
+
+  const stars = 5; // Display 5 stars visually
+  const normalizedScore = (score / outOf) * stars;
+
+  for (let i = 1; i <= stars; i++) {
+      const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      star.setAttribute('class', 'w-4 h-4 me-1');
+      star.setAttribute('fill', 'currentColor');
+      star.setAttribute('viewBox', '0 0 22 20');
+      star.setAttribute('aria-hidden', 'true');
+      star.innerHTML = `
+          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734
+                    -2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l
+                    -5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656
+                    3.563-.863 5.031a1.532 1.532 0 0 0 2.226
+                    1.616L11 17.033l4.518 2.375a1.534 1.534 0 0
+                    0 2.226-1.617l-.863-5.03L20.537
+                    9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+      `;
+
+      if (i <= Math.floor(normalizedScore)) {
+          star.classList.add('text-yellow-300'); // Full star
+      } else if (i - normalizedScore < 1) {
+          star.classList.add('text-yellow-200'); // Could be for half star style if needed
+      } else {
+          star.classList.add('text-gray-300', 'dark:text-gray-500'); // Empty star
+      }
+
+      ratingContainer.appendChild(star);
+  }
+
+  // Add text value
+  const text = document.createElement('p');
+  text.className = 'ms-1 text-sm font-medium text-gray-500 dark:text-gray-400';
+  text.textContent = `${score}/${outOf}`;
+  ratingContainer.appendChild(text);
+}
 
 // particles.js configuration
 tsParticles.load("tsparticles", {
@@ -184,30 +259,79 @@ const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
-  const prompt = `Using the TMDb API movie genres, classify the input into exactly one matching genre. The input must be a matchable meaningful word or a coherent sentence. If the input contains unrelated words like input, urinate or contian numbers, special characters (e.g., *, %, $, etc.), a combination of these, or random patterns (e.g., "*********"), return "Invalid input". Do not classify such inputs into a genre. For valid inputs, return only the **ID** of the genre as defined by the TMDb API, without any additional text or explanation. The TMDb movie genres and their IDs are as follows:
+  const prompt = `Task: Classify the input into exactly one TMDb genre ID based on the user’s emotional state, need, or movie-related keywords.
 
-- Action: 28
-- Adventure: 12
-- Animation: 16
-- Comedy: 35
-- Crime: 80
-- Documentary: 99
-- Drama: 18
-- Family: 10751
-- Fantasy: 14
-- History: 36
-- Horror: 27
-- Music: 10402
-- Mystery: 9648
-- Romance: 10749
-- Science Fiction: 878
-- TV Movie: 10770
-- Thriller: 53
-- War: 10752
-- Western: 37
+Valid Inputs:
+
+Emotional states or needs (e.g., "I feel lonely," "I need a laugh," "I want to relax").
+
+Movie-related keywords or phrases (e.g., "space aliens," "crime investigation").
+
+Invalid Inputs:
+
+Contains numbers, special characters (e.g., *, $), or random patterns.
+
+Unrelated topics (e.g., "urinate," "how to cook").
+
+Gibberish or ambiguous phrases (e.g., "asdfg").
+
+Genre Mapping Rules:
+
+Emotions/Needs → Genres:
+
+Emotion/Need Keywords	Genre & ID
+Love, romance, relationships, longing, dating	- 10749 (Romance)
+Fear, suspense, scary, paranormal, haunted	- 27 (Horror)
+Laughter, jokes, humor, silly, satire, angry	- 35 (Comedy)
+Relaxation, calm, emotional stories, tearjerker, heartfelt	- 18 (Drama)
+Excitement, action, adrenaline, explosions, battles	- 28 (Action)
+Fantasy, magical, mythical, dragons, enchanted	- 14 (Fantasy)
+Thought-provoking, real-life, educational, investigative - 99 (Documentary)
+Adventure, epic journey, exploration, treasure hunt, survival, sick -	12 (Adventure)
+Crime, heist, gangster, detective, justice	- 80 (Crime)
+Nostalgia, childhood, family bonding, kid-friendly	- 10751 (Family)
+History, historical events, war heroes, ancient times	- 36 (History)
+Music, concerts, band stories, musicals	- 10402 (Music)
+Mystery, unsolved crimes, puzzles, secrets	- 9648 (Mystery)
+Thrills, edge-of-seat tension, psychological mind games	- 53 (Thriller)
+War, military conflict, soldiers, patriotism	- 10752 (War)
+Westerns, cowboys, frontier life, wild west	- 37 (Western)
+Animation, cartoons, animated adventures, family-friendly fantasy - 16 (Animation)
+TV-style, lighthearted, made-for-TV drama	- 10770 (TV Movie)
+
+TMDb Genres (Full List for Reference):
+Action: 28 | Adventure: 12 | Animation: 16 | Comedy: 35
+
+Crime: 80 | Documentary: 99 | Drama: 18 | Family: 10751
+
+Fantasy: 14 | History: 36 | Horror: 27 | Music: 10402
+
+Mystery: 9648 | Romance: 10749 | Science Fiction: 878 | TV Movie: 10770
+
+Thriller: 53 | War: 10752 | Western: 37
+
+Examples of Mapped Inputs:
+
+"I miss my childhood" → 10751 (Family)
+
+"I want to solve a puzzle" → 9648 (Mystery)
+
+"Tell me about ancient Rome" → 36 (History)
+
+"I need a wild west adventure" → 37 (Western)
+
+"Play something with singing!" → 10402 (Music)
+
+"I'm in love" →  10749
+
+"I feel scared" → 27
+
+"Make me laugh" →  35
+
+"I need relaxation" → 18
 
 Input: ${input}
-Output: [ID only if input is a meaningful word or coherent sentence, but if the input includes numbers, special characters, or random patterns, your only output must be "Invalid input"]`;
+Output: [Genre ID or "Invalid input"]`;
 
   try {
     // api 1
