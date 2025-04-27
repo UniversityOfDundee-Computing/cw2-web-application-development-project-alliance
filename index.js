@@ -32,17 +32,17 @@ const cleanupModal = () => {
   document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
   // Ensure body scroll is restored
   document.body.classList.remove("overflow-hidden");
-  
+
   //close the video after closing the modal
   const trailerDiv = document.querySelector("#modalTrailer");
-if (trailerDiv) {
-  const iframe = trailerDiv.querySelector("iframe");
-  if (iframe) {
-    const src = iframe.src;
-    iframe.src = ""; // clear it
-    iframe.src = src; // re-assign it to reset (this stops YouTube video!)
+  if (trailerDiv) {
+    const iframe = trailerDiv.querySelector("iframe");
+    if (iframe) {
+      const src = iframe.src;
+      iframe.src = ""; // clear it
+      iframe.src = src; // re-assign it to reset (this stops YouTube video!)
+    }
   }
-}
 };
 
 //remove backdrop initiator
@@ -61,8 +61,10 @@ const poppingFnc = (movie) => {
     "modalImage"
   ).src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   document.getElementById("modalOverview").textContent = movie.overview;
-  renderStars(Math.floor(movie.vote_average),10);
-  document.getElementById("modalReleaseDate").textContent = `Release Date : ${movie.release_date}`;
+  renderStars(Math.floor(movie.vote_average), 10);
+  document.getElementById(
+    "modalReleaseDate"
+  ).textContent = `Release Date : ${movie.release_date}`;
 
   // Optional: fetch trailer
   fetch(
@@ -95,40 +97,38 @@ const poppingFnc = (movie) => {
   movieModal.show();
 };
 
-
 //for favourite button inside modal
- // Get the button and heart icon
- const favoriteButton = document.getElementById("favoriteButton");
- const heartIcon = document.getElementById("heartIcon");
+// Get the button and heart icon
+const favoriteButton = document.getElementById("favoriteButton");
+const heartIcon = document.getElementById("heartIcon");
 
- // Set the initial content (white heart emoji)
- heartIcon.innerHTML = "🤍"; // White heart emoji
+// Set the initial content (white heart emoji)
+heartIcon.innerHTML = "🤍"; // White heart emoji
 
- // Toggle the heart icon when clicked
- favoriteButton.addEventListener("click", () => {
-   if (heartIcon.innerHTML === "🤍") {
-     heartIcon.innerHTML = "❤️"; // Red heart emoji
-   } else {
-     heartIcon.innerHTML = "🤍"; // White heart emoji
-   }
- });
-
+// Toggle the heart icon when clicked
+favoriteButton.addEventListener("click", () => {
+  if (heartIcon.innerHTML === "🤍") {
+    heartIcon.innerHTML = "❤️"; // Red heart emoji
+  } else {
+    heartIcon.innerHTML = "🤍"; // White heart emoji
+  }
+});
 
 //star rendering
 function renderStars(score, outOf = 10) {
-  const ratingContainer = document.getElementById('rating');
-  ratingContainer.innerHTML = ''; // Clear previous stars
+  const ratingContainer = document.getElementById("rating");
+  ratingContainer.innerHTML = ""; // Clear previous stars
 
   const stars = 5; // Display 5 stars visually
   const normalizedScore = (score / outOf) * stars;
 
   for (let i = 1; i <= stars; i++) {
-      const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      star.setAttribute('class', 'w-4 h-4 me-1');
-      star.setAttribute('fill', 'currentColor');
-      star.setAttribute('viewBox', '0 0 22 20');
-      star.setAttribute('aria-hidden', 'true');
-      star.innerHTML = `
+    const star = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    star.setAttribute("class", "w-4 h-4 me-1");
+    star.setAttribute("fill", "currentColor");
+    star.setAttribute("viewBox", "0 0 22 20");
+    star.setAttribute("aria-hidden", "true");
+    star.innerHTML = `
           <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734
                     -2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l
                     -5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656
@@ -138,20 +138,20 @@ function renderStars(score, outOf = 10) {
                     9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
       `;
 
-      if (i <= Math.floor(normalizedScore)) {
-          star.classList.add('text-yellow-300'); // Full star
-      } else if (i - normalizedScore < 1) {
-          star.classList.add('text-yellow-200'); // Could be for half star style if needed
-      } else {
-          star.classList.add('text-gray-300', 'dark:text-gray-500'); // Empty star
-      }
+    if (i <= Math.floor(normalizedScore)) {
+      star.classList.add("text-yellow-300"); // Full star
+    } else if (i - normalizedScore < 1) {
+      star.classList.add("text-yellow-200"); // Could be for half star style if needed
+    } else {
+      star.classList.add("text-gray-300", "dark:text-gray-500"); // Empty star
+    }
 
-      ratingContainer.appendChild(star);
+    ratingContainer.appendChild(star);
   }
 
   // Add text value
-  const text = document.createElement('p');
-  text.className = 'ms-1 text-sm font-medium text-gray-500 dark:text-gray-400';
+  const text = document.createElement("p");
+  text.className = "ms-1 text-sm font-medium text-gray-500 dark:text-gray-400";
   text.textContent = `${score}/${outOf}`;
   ratingContainer.appendChild(text);
 }
@@ -358,24 +358,21 @@ Output: [Genre ID or "Invalid input"]`;
       data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
     document.getElementById("result").innerText = "🎭 Genre: " + text.trim();
 
-    // console.log(typeof Number(text));
-    // moves to the next page if the genre is found.
-    window.location.href = "index.html";
+    if (text.trim() === "Invalid input") {
+      document.getElementById("result").innerText =
+        "❌ Please enter a valid mood or keyword!";
+      return;
+    } else {
+      localStorage.setItem("genre", text.trim());
+      window.location.href = "index.html";
+    }
 
     // console.log(text);
-
-    //
-
-    // generate a random page number between 1 and 72
-    // const randomPage = Math.floor(Math.random() * 72) + 1;
-
-    localStorage.setItem("genre", text.trim());
   } catch (error) {
     document.getElementById("result").innerText = "❌ Error: " + error.message;
     console.error("API Error:", error);
   }
 }
-
 
 const goBackBtn = document.getElementById("goBackBtn");
 goBackBtn.addEventListener("click", () => {
