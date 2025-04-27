@@ -184,7 +184,7 @@ const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
-  const prompt = `Using the TMDb API movie genres, classify the input into exactly one matching genre. The input must be a meaningful and coherent sentence. If the input contains numbers, special characters (e.g., *, %, $, etc.), a combination of these, or random patterns (e.g., "*********"), return "Invalid input". Do not classify such inputs into a genre. For valid inputs, return only the **ID** of the genre as defined by the TMDb API, without any additional text or explanation. The TMDb movie genres and their IDs are as follows:
+  const prompt = `Using the TMDb API movie genres, classify the input into exactly one matching genre. The input must be a matchable meaningful word or a coherent sentence. If the input contains unrelated words like input, urinate or contian numbers, special characters (e.g., *, %, $, etc.), a combination of these, or random patterns (e.g., "*********"), return "Invalid input". Do not classify such inputs into a genre. For valid inputs, return only the **ID** of the genre as defined by the TMDb API, without any additional text or explanation. The TMDb movie genres and their IDs are as follows:
 
 - Action: 28
 - Adventure: 12
@@ -207,7 +207,7 @@ async function classifyGenre() {
 - Western: 37
 
 Input: ${input}
-Output: [ID only, but if the input is not a meaningful and coherent sentence, or includes numbers, special characters, or random patterns, your only output must be "Invalid input"]`;
+Output: [ID only if input is a meaningful word or coherent sentence, but if the input includes numbers, special characters, or random patterns, your only output must be "Invalid input"]`;
 
   try {
     // api 1
