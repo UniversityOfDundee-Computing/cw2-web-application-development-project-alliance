@@ -184,30 +184,79 @@ const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
-  const prompt = `Using the TMDb API movie genres, classify the input into exactly one matching genre. The input must be a matchable meaningful word or a coherent sentence. If the input contains unrelated words like input, urinate or contian numbers, special characters (e.g., *, %, $, etc.), a combination of these, or random patterns (e.g., "*********"), return "Invalid input". Do not classify such inputs into a genre. For valid inputs, return only the **ID** of the genre as defined by the TMDb API, without any additional text or explanation. The TMDb movie genres and their IDs are as follows:
+  const prompt = `Task: Classify the input into exactly one TMDb genre ID based on the user’s emotional state, need, or movie-related keywords.
 
-- Action: 28
-- Adventure: 12
-- Animation: 16
-- Comedy: 35
-- Crime: 80
-- Documentary: 99
-- Drama: 18
-- Family: 10751
-- Fantasy: 14
-- History: 36
-- Horror: 27
-- Music: 10402
-- Mystery: 9648
-- Romance: 10749
-- Science Fiction: 878
-- TV Movie: 10770
-- Thriller: 53
-- War: 10752
-- Western: 37
+Valid Inputs:
+
+Emotional states or needs (e.g., "I feel lonely," "I need a laugh," "I want to relax").
+
+Movie-related keywords or phrases (e.g., "space aliens," "crime investigation").
+
+Invalid Inputs:
+
+Contains numbers, special characters (e.g., *, $), or random patterns.
+
+Unrelated topics (e.g., "urinate," "how to cook").
+
+Gibberish or ambiguous phrases (e.g., "asdfg").
+
+Genre Mapping Rules:
+
+Emotions/Needs → Genres:
+
+Emotion/Need Keywords	Genre & ID
+Love, romance, relationships, longing, dating	- 10749 (Romance)
+Fear, suspense, scary, paranormal, haunted	- 27 (Horror)
+Laughter, jokes, humor, silly, satire, angry	- 35 (Comedy)
+Relaxation, calm, emotional stories, tearjerker, heartfelt	- 18 (Drama)
+Excitement, action, adrenaline, explosions, battles	- 28 (Action)
+Fantasy, magical, mythical, dragons, enchanted	- 14 (Fantasy)
+Thought-provoking, real-life, educational, investigative - 99 (Documentary)
+Adventure, epic journey, exploration, treasure hunt, survival, sick -	12 (Adventure)
+Crime, heist, gangster, detective, justice	- 80 (Crime)
+Nostalgia, childhood, family bonding, kid-friendly	- 10751 (Family)
+History, historical events, war heroes, ancient times	- 36 (History)
+Music, concerts, band stories, musicals	- 10402 (Music)
+Mystery, unsolved crimes, puzzles, secrets	- 9648 (Mystery)
+Thrills, edge-of-seat tension, psychological mind games	- 53 (Thriller)
+War, military conflict, soldiers, patriotism	- 10752 (War)
+Westerns, cowboys, frontier life, wild west	- 37 (Western)
+Animation, cartoons, animated adventures, family-friendly fantasy - 16 (Animation)
+TV-style, lighthearted, made-for-TV drama	- 10770 (TV Movie)
+
+TMDb Genres (Full List for Reference):
+Action: 28 | Adventure: 12 | Animation: 16 | Comedy: 35
+
+Crime: 80 | Documentary: 99 | Drama: 18 | Family: 10751
+
+Fantasy: 14 | History: 36 | Horror: 27 | Music: 10402
+
+Mystery: 9648 | Romance: 10749 | Science Fiction: 878 | TV Movie: 10770
+
+Thriller: 53 | War: 10752 | Western: 37
+
+Examples of Mapped Inputs:
+
+"I miss my childhood" → 10751 (Family)
+
+"I want to solve a puzzle" → 9648 (Mystery)
+
+"Tell me about ancient Rome" → 36 (History)
+
+"I need a wild west adventure" → 37 (Western)
+
+"Play something with singing!" → 10402 (Music)
+
+"I'm in love" →  10749
+
+"I feel scared" → 27
+
+"Make me laugh" →  35
+
+"I need relaxation" → 18
 
 Input: ${input}
-Output: [ID only if input is a meaningful word or coherent sentence, but if the input includes numbers, special characters, or random patterns, your only output must be "Invalid input"]`;
+Output: [Genre ID or "Invalid input"]`;
 
   try {
     // api 1
