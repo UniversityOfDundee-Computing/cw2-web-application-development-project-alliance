@@ -117,7 +117,7 @@ const reg = moviesEmojis.find((g) => g.id === Number(genre));
 document.getElementById(
   "currentMovieList"
 ).textContent = `These are the list of ${reg.name} ${reg.emoji} movies`;
-console.log(reg);
+// console.log(reg);
 
 const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${Number(
   genre
@@ -228,3 +228,9 @@ async function classifyGenre() {
     console.error("API Error:", error);
   }
 }
+
+
+const goBackBtn = document.getElementById("goBackBtn");
+goBackBtn.addEventListener("click", () => {
+  window.location.href = "welcome.html";
+});
