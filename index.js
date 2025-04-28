@@ -21,42 +21,42 @@ const moviesEmojis = [
 ];
 
 // particles.js configuration
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   tsParticles.load("tsparticles", {
     background: {
-      color: "#000000",  // Set background to black for space effect
+      color: "#000000", // Set background to black for space effect
     },
     particles: {
       number: {
-        value: 100,  // Number of particles
+        value: 100, // Number of particles
         density: {
           enable: true,
-          value_area: 1000  // Control density
-        }
+          value_area: 1000, // Control density
+        },
       },
       size: {
-        value: 5,  // Size of the particles
-        random: true,  // Randomize the sizes
+        value: 5, // Size of the particles
+        random: true, // Randomize the sizes
         anim: {
           enable: true,
           speed: 3,
-          size_min: 1
-        }
+          size_min: 1,
+        },
       },
       opacity: {
-        value: 0.8,  // Slight opacity to simulate stars
+        value: 0.8, // Slight opacity to simulate stars
         random: true,
         anim: {
           enable: true,
           speed: 1,
           opacity_min: 0.1,
-          sync: false
-        }
+          sync: false,
+        },
       },
       move: {
         enable: true,
-        speed: 1,  // Slow speed to simulate floating particles
-        direction: "none",  // Free movement
+        speed: 1, // Slow speed to simulate floating particles
+        direction: "none", // Free movement
         random: true,
         straight: false,
         out_mode: "out",
@@ -64,45 +64,43 @@ document.addEventListener("DOMContentLoaded", function() {
         attract: {
           enable: true,
           rotateX: 600,
-          rotateY: 1200
-        }
+          rotateY: 1200,
+        },
       },
       shape: {
-        type: "circle",  // Particle shape
+        type: "circle", // Particle shape
         stroke: {
           width: 0,
-          color: "#fff"
-        }
+          color: "#fff",
+        },
       },
       line_linked: {
-        enable: false,  // Disable particle connections to mimic stars spread out
+        enable: false, // Disable particle connections to mimic stars spread out
       },
       collisions: {
-        enable: false  // No collisions between particles for a free space effect
+        enable: false, // No collisions between particles for a free space effect
       },
       color: {
-        value: "#ffffff"  // White particles to resemble stars
+        value: "#ffffff", // White particles to resemble stars
       },
     },
     interactivity: {
       events: {
         onhover: {
           enable: true,
-          mode: "repulse"  // When you hover over particles, they will repel
+          mode: "repulse", // When you hover over particles, they will repel
         },
       },
       modes: {
         repulse: {
-          distance: 100,  // Hover effect distance
-          duration: 0.4
+          distance: 100, // Hover effect distance
+          duration: 0.4,
         },
-      }
+      },
     },
-    detectRetina: true  // Ensure proper scaling for retina displays
+    detectRetina: true, // Ensure proper scaling for retina displays
   });
 });
-
-
 
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
@@ -131,7 +129,7 @@ const cleanupModal = () => {
 
 // Add event listener to detect clicks outside the modal and close it
 document.addEventListener("click", function (event) {
-  const modal = document.querySelector("#modalTrailer");  // Change to your modal's ID
+  const modal = document.querySelector("#modalTrailer"); // Change to your modal's ID
   const isClickInsideModal = modal.contains(event.target);
 
   // If the click is outside the modal, close it and stop the video
@@ -151,6 +149,35 @@ document.querySelectorAll("[data-modal-hide='movieModal']").forEach((btn) => {
 const poppingFnc = (movie) => {
   // Set title, image, and overview
   console.log(movie);
+
+  // Get the button and heart icon
+  const favoriteButton = document.getElementById("favoriteButton");
+  const heartIcon = document.getElementById("heartIcon");
+
+  // Remove old click handlers
+  const newFavoriteButton = favoriteButton.cloneNode(true);
+  favoriteButton.parentNode.replaceChild(newFavoriteButton, favoriteButton);
+
+  // Always set white heart initially
+  heartIcon.innerHTML = "🤍"; // White heart emoji
+
+  // Add movie to local storage when clicked
+  newFavoriteButton.addEventListener("click", () => {
+    const movies = JSON.parse(localStorage.getItem("watch-list")) || [];
+
+    // Check if movie already exists
+    const isMovieInList = movies.some((m) => m.id === movie.id);
+
+    if (!isMovieInList) {
+      movies.push(movie);
+      localStorage.setItem("watch-list", JSON.stringify(movies));
+      alert("Movie added to your watch list!");
+    } else {
+      alert("Movie already in your watch list!");
+    }
+  });
+
+  // this is for adding the movie to watch list (local storage)
   document.getElementById("modalTitle").textContent = movie.title;
   document.getElementById(
     "modalImage"
@@ -189,25 +216,9 @@ const poppingFnc = (movie) => {
     .catch((err) => console.error(err));
 
   // Show the modal (Flowbite way)
+
   movieModal.show();
 };
-
-//for favourite button inside modal
-// Get the button and heart icon
-const favoriteButton = document.getElementById("favoriteButton");
-const heartIcon = document.getElementById("heartIcon");
-
-// Set the initial content (white heart emoji)
-heartIcon.innerHTML = "🤍"; // White heart emoji
-
-// Toggle the heart icon when clicked
-favoriteButton.addEventListener("click", () => {
-  if (heartIcon.innerHTML === "🤍") {
-    heartIcon.innerHTML = "❤️"; // Red heart emoji
-  } else {
-    heartIcon.innerHTML = "🤍"; // White heart emoji
-  }
-});
 
 //star rendering
 function renderStars(score, outOf = 10) {
@@ -331,7 +342,17 @@ const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
+
+  // 🛑 If input is empty, show message and return early
+  if (!input) {
+    document.getElementById("result").innerText =
+      "❗ Please enter something first!";
+    return;
+  }
+
   const prompt = `Task: Classify the input into exactly one TMDb genre ID based on the user’s emotional state, need, or movie-related keywords.
+
+  
 
 Valid Inputs:
 
