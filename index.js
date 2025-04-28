@@ -259,7 +259,17 @@ const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
+
+  // 🛑 If input is empty, show message and return early
+  if (!input) {
+    document.getElementById("result").innerText =
+      "❗ Please enter something first!";
+    return;
+  }
+
   const prompt = `Task: Classify the input into exactly one TMDb genre ID based on the user’s emotional state, need, or movie-related keywords.
+
+  
 
 Valid Inputs:
 
