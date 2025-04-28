@@ -53,3 +53,18 @@ html {
   filter: invert(24%) sepia(89%) saturate(1546%) hue-rotate(230deg)
     brightness(94%) contrast(90%);
 }
+
+.weblogo {
+  max-width: 120px; /* Limits logo width */
+  height: auto; /* Maintains aspect ratio */
+}
+
+/* For very small screens (e.g., < 400px) */
+@media (max-width: 400px) {
+  .weblogo {
+    max-width: 80px;
+  }
+  h1 {
+    font-size: 1.5rem; /* Further reduce text size */
+  }
+}
