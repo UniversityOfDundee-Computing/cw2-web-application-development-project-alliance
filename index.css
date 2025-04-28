@@ -1,7 +1,3 @@
-#background {
-  background-image: url("Materials/wmremove-transformed.jpeg");
-}
-
 /* Apply to any scrollable element */
 ::-webkit-scrollbar {
   width: 8px;
