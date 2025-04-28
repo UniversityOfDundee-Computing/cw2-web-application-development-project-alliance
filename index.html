@@ -18,7 +18,7 @@
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <title>Blurred Background Image</title>
+  <title>Movies List</title>
 </head>
 
 <body class="m-0 p-0">
@@ -28,7 +28,8 @@
       class="fixed top-1/2 left-7 -translate-y-1/4 max-[1100px]:fixed max-[1100px]:bottom-0 max-[1100px]:left-0 max-[1100px]:right-0 max-[1100px]:top-auto max-[1100px]:translate-y-0 flex flex-col space-y-6 max-[1100px]:flex-row max-[1100px]:space-y-0 max-[1100px]:space-x-6 z-50 group max-[1100px]:justify-center max-[1100px]:py-4 max-[1100px]:backdrop-blur-sm max-[1100px]:bg-white/20">
       <!-- Sidebar Item -->
       <div class="relative flex items-center">
-        <a href="welcome.html" class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
+        <a href="welcome.html"
+          class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
           <img class="bd imgsize filter-indigo" src="https://www.svgrepo.com/show/415633/basic-home.svg"
             alt="Home Icon" />
         </a>
@@ -39,7 +40,8 @@
       </div>
 
       <div class="relative flex items-center">
-        <a href="favorite.html" class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
+        <a href="favorite.html"
+          class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
           <img src="https://www.svgrepo.com/show/415645/basic-checklist-ui.svg" class="bd imgsize filter-indigo"
             alt="Dashboard Icon" />
         </a>
@@ -61,17 +63,11 @@
           <i class="fa-solid fa-rotate"></i>
         </button>
         <h1 class="text-4xl font-bold text-white" id="currentMovieList"></h1>
-
         <button onclick="goBackBtn()" id="goBackBtn"
           class="flex justify-center items-center w-16 h-16 bg-blue-700 rounded-full text-white text-2xl">
           <i class="fa-solid fa-arrow-left"></i>
         </button>
       </div>
-
-      <!-- <div class="flex justify-center items-center">
-        <i class="fa-solid fa-arrow-up fa-beat text-4xl text-gray-500 text-white"></i>
-      </div> -->
-
       <!-- this are the list of the movies -->
       <div id="movieList" class="flex flex-row flex-wrap justify-center items-center"></div>
     </section>
@@ -125,12 +121,6 @@
   </section>
   <!-- this are the list of the movies -->
   <div id="movieList" class="flex flex-row flex-wrap justify-center items-center"></div>
-  </section>
-  </main>
-  <section></section>
-  <footer>
-    <span>coming soon to add</span>
-  </footer>
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   <script src="index.js"></script>
