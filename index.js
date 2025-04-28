@@ -203,7 +203,7 @@ heartIcon.innerHTML = "🤍"; // White heart emoji
 // Toggle the heart icon when clicked
 favoriteButton.addEventListener("click", () => {
   if (heartIcon.innerHTML === "🤍") {
-    heartIcon.innerHTML = "❤️"; // Red heart emoji
+    heartIcon.innerHTML = "💜"; // Red heart emoji
   } else {
     heartIcon.innerHTML = "🤍"; // White heart emoji
   }
@@ -246,7 +246,7 @@ function renderStars(score, outOf = 10) {
 
   // Add text value
   const text = document.createElement("p");
-  text.className = "ms-1 text-sm font-medium text-gray-500 dark:text-gray-400";
+  text.className = "ms-1 text-sm font-medium text-white";
   text.textContent = `${score}/${outOf}`;
   ratingContainer.appendChild(text);
 }
