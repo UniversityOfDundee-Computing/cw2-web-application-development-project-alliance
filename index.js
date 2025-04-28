@@ -20,6 +20,90 @@ const moviesEmojis = [
   { id: 37, name: "Western", emoji: "🤠" },
 ];
 
+// particles.js configuration
+document.addEventListener("DOMContentLoaded", function() {
+  tsParticles.load("tsparticles", {
+    background: {
+      color: "#000000",  // Set background to black for space effect
+    },
+    particles: {
+      number: {
+        value: 100,  // Number of particles
+        density: {
+          enable: true,
+          value_area: 1000  // Control density
+        }
+      },
+      size: {
+        value: 5,  // Size of the particles
+        random: true,  // Randomize the sizes
+        anim: {
+          enable: true,
+          speed: 3,
+          size_min: 1
+        }
+      },
+      opacity: {
+        value: 0.8,  // Slight opacity to simulate stars
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
+      },
+      move: {
+        enable: true,
+        speed: 1,  // Slow speed to simulate floating particles
+        direction: "none",  // Free movement
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: true,
+          rotateX: 600,
+          rotateY: 1200
+        }
+      },
+      shape: {
+        type: "circle",  // Particle shape
+        stroke: {
+          width: 0,
+          color: "#fff"
+        }
+      },
+      line_linked: {
+        enable: false,  // Disable particle connections to mimic stars spread out
+      },
+      collisions: {
+        enable: false  // No collisions between particles for a free space effect
+      },
+      color: {
+        value: "#ffffff"  // White particles to resemble stars
+      },
+    },
+    interactivity: {
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse"  // When you hover over particles, they will repel
+        },
+      },
+      modes: {
+        repulse: {
+          distance: 100,  // Hover effect distance
+          duration: 0.4
+        },
+      }
+    },
+    detectRetina: true  // Ensure proper scaling for retina displays
+  });
+});
+
+
+
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
 
@@ -44,6 +128,17 @@ const cleanupModal = () => {
     }
   }
 };
+
+// Add event listener to detect clicks outside the modal and close it
+document.addEventListener("click", function (event) {
+  const modal = document.querySelector("#modalTrailer");  // Change to your modal's ID
+  const isClickInsideModal = modal.contains(event.target);
+
+  // If the click is outside the modal, close it and stop the video
+  if (!isClickInsideModal) {
+    cleanupModal();
+  }
+});
 
 //remove backdrop initiator
 document.querySelectorAll("[data-modal-hide='movieModal']").forEach((btn) => {
@@ -155,29 +250,6 @@ function renderStars(score, outOf = 10) {
   text.textContent = `${score}/${outOf}`;
   ratingContainer.appendChild(text);
 }
-
-// particles.js configuration
-tsParticles.load("tsparticles", {
-  particles: {
-    number: { value: 50 },
-    size: { value: 3 },
-    move: { enable: true, speed: 1 },
-    line_linked: { enable: true, distance: 150 },
-  },
-  interactivity: {
-    events: { onhover: { enable: true, mode: "attract" } },
-  },
-  mode: {
-    attract: {
-      distance: 500,
-      duration: 0.4,
-      speed: 1,
-    },
-  },
-  background: {
-    color: "#000",
-  },
-});
 
 // const filterMovies = () => {
 // generate a random page number between 1 and 72
