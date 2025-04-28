@@ -17,12 +17,38 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Animate.css CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <title>Blurred Background Image</title>
 </head>
+
 <body class="m-0 p-0">
   <div id="tsparticles" class="absolute inset-0 -z-10"></div>
   <header>
-    <nav></nav>
+    <div
+      class="fixed top-1/2 left-7 -translate-y-1/4 max-[1100px]:fixed max-[1100px]:bottom-0 max-[1100px]:left-0 max-[1100px]:right-0 max-[1100px]:top-auto max-[1100px]:translate-y-0 flex flex-col space-y-6 max-[1100px]:flex-row max-[1100px]:space-y-0 max-[1100px]:space-x-6 z-50 group max-[1100px]:justify-center max-[1100px]:py-4 max-[1100px]:backdrop-blur-sm max-[1100px]:bg-white/20">
+      <!-- Sidebar Item -->
+      <div class="relative flex items-center">
+        <a href="welcome.html" class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
+          <img class="bd imgsize filter-indigo" src="https://www.svgrepo.com/show/415633/basic-home.svg"
+            alt="Home Icon" />
+        </a>
+        <span
+          class="absolute bottom-full mb-2 opacity-0 peer-hover:opacity-100 bg-indigo-400 text-white font-bold text-md px-2 py-1 rounded transition-opacity duration-200 whitespace-nowrap shadow-md">
+          Home
+        </span>
+      </div>
+
+      <div class="relative flex items-center">
+        <a href="favorite.html" class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
+          <img src="https://www.svgrepo.com/show/415645/basic-checklist-ui.svg" class="bd imgsize filter-indigo"
+            alt="Dashboard Icon" />
+        </a>
+        <span
+          class="absolute bottom-full mb-2 opacity-0 peer-hover:opacity-100 bg-indigo-400 text-white font-bold text-md px-2 py-1 rounded transition-opacity duration-200 whitespace-nowrap shadow-md">
+          Favorite
+        </span>
+      </div>
+    </div>
   </header>
   <main class="bg-cover bg-center min-h-screen flex items-center justify-center">
     <section class="backdrop-blur-sm bg-white/15 p-8 rounded-3xl h-[90vh] max-w-6x1 w-10/12 overflow-y-scroll">
@@ -36,7 +62,8 @@
         </button>
         <h1 class="text-4xl font-bold text-white" id="currentMovieList"></h1>
 
-        <button onclick="goBackBtn()" id="goBackBtn" class="flex justify-center items-center w-16 h-16 bg-blue-700 rounded-full text-white text-2xl">
+        <button onclick="goBackBtn()" id="goBackBtn"
+          class="flex justify-center items-center w-16 h-16 bg-blue-700 rounded-full text-white text-2xl">
           <i class="fa-solid fa-arrow-left"></i>
         </button>
       </div>
