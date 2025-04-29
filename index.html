@@ -39,7 +39,7 @@
       <div class="relative flex items-center">
         <a href="welcome.html"
           class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
-          <img class="bd imgsize filter-indigo" src="https://www.svgrepo.com/show/415633/basic-home.svg"
+          <img class="bd2 imgsize2 filter-indigo" src="https://www.svgrepo.com/show/415633/basic-home.svg"
             alt="Home Icon" />
         </a>
         <span
@@ -51,7 +51,7 @@
       <div class="relative flex items-center">
         <a href="fav.html"
           class="peer bg-white p-3 rounded-full border border-gray-300 transition-all duration-200">
-          <img src="https://www.svgrepo.com/show/415645/basic-checklist-ui.svg" class="bd imgsize filter-indigo"
+          <img src="https://www.svgrepo.com/show/415645/basic-checklist-ui.svg" class="bd2 imgsize2 filter-indigo"
             alt="Dashboard Icon" />
         </a>
         <span
@@ -77,7 +77,7 @@
         <h1 class="text-base sm:text-lg md:text-2xl font-bold text-white mx-2 text-center" id="currentMovieList"></h1>
       
         <!-- Back Button -->
-        <button onclick="goBackBtn()" 
+        <button id="goBackBtn" onclick="goBackBtn()" 
           class="bd group flex justify-center items-center w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] aspect-square rounded-full bg-white hover:bg-indigo-50 transition-all">
           <i class="fa-solid fa-arrow-left text-indigo-500"></i>
         </button>
@@ -111,7 +111,7 @@
           <!-- Body -->
           <div class="p-6 space-y-4 bg-transparent/30">
             <div class="flex gap-5">
-              <img id="modalImage" class="w-full rounded h-[50vh]" />
+              <img id="modalImage" class="rounded h-[50vh]" />
               <div class="w-full" >
                 <p id="modalOverview" class="text-1xl mb-4 text-white text-justify"></p>
                 <!--more deteails to be added to the movie-->
