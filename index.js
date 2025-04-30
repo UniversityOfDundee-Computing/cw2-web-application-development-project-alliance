@@ -102,6 +102,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.querySelector(".onkey");
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      classifyGenre();
+    }
+  });
+});
+
 const container = document.getElementById("buttonContainer");
 container.innerHTML = "";
 
@@ -274,7 +283,7 @@ const reg = moviesEmojis.find((g) => g.id === Number(genre));
 
 document.getElementById(
   "currentMovieList"
-).textContent = `These are the list of ${reg.name} ${reg.emoji} movies`;
+).textContent = `List of ${reg.name} ${reg.emoji} Movies`;
 // console.log(reg);
 
 const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${Number(
@@ -345,8 +354,7 @@ async function classifyGenre() {
 
   // 🛑 If input is empty, show message and return early
   if (!input) {
-    document.getElementById("result").innerText =
-      "❗ Please enter something first!";
+    showError("❗ Please enter something first!");
     return;
   }
 
@@ -364,7 +372,7 @@ Invalid Inputs:
 
 Contains numbers, special characters (e.g., *, $), or random patterns.
 
-Unrelated topics (e.g., "urinate," "how to cook").
+Unrelated topics (e.g.,"input", "urinate," "how to cook").
 
 Gibberish or ambiguous phrases (e.g., "asdfg").
 
@@ -451,11 +459,11 @@ Output: [Genre ID or "Invalid input"]`;
       data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
     document.getElementById("result").innerText = "🎭 Genre: " + text.trim();
 
-    if (text.trim() === "Invalid input") {
-      document.getElementById("result").innerText =
-        "❌ Please enter a valid mood or keyword!";
+    if (isNaN(text.trim()) || text.trim() === "") {
+      showError("❌ Please enter a valid mood or keyword!");
       return;
     } else {
+      showError("🎭 Genre: " + text.trim());
       localStorage.setItem("genre", text.trim());
       window.location.href = "index.html";
     }
@@ -471,3 +479,13 @@ const goBackBtn = document.getElementById("goBackBtn");
 goBackBtn.addEventListener("click", () => {
   window.location.href = "welcome.html";
 });
+
+function showError(message) {
+  const el = document.getElementById("result");
+  el.classList.add("bg-indigo-500");
+  el.textContent = message;
+  setTimeout(() => {
+    el.textContent = "";
+    el.classList.remove("bg-indigo-500");
+  }, 3000);
+}
