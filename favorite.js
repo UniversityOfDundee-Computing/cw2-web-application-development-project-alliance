@@ -37,7 +37,8 @@ if (watchListMovies.length === 0) {
     //   this is the button to remove the movie from the watchlist
     const removeButton = document.createElement("button");
     removeButton.classList.add(
-      "bg-red-500",
+      "bg-indigo-400",
+      "hover:bg-indigo-700",
       "text-white",
       "rounded-lg",
       "p-2",
