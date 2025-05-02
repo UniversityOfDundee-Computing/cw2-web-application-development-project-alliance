@@ -1,9 +1,15 @@
 .bd:hover {
   border-radius: 50px;
   box-shadow: 0 0 0 10px rgba(82, 84, 84, 0.3); /* Outer glow effect */
+  padding: 3px;
 }
 
 .imgsize {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+}
+
+.filter-indigo {
+  filter: invert(24%) sepia(89%) saturate(1546%) hue-rotate(230deg)
+    brightness(94%) contrast(90%);
 }
