@@ -112,14 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const container = document.getElementById("buttonContainer");
-container.innerHTML="";
+container.innerHTML = "";
 
 let movieModalElement;
 let movieModal;
 
 document.addEventListener("DOMContentLoaded", () => {
- movieModalElement = document.getElementById("movieModal");
- movieModal = new Modal(movieModalElement);
+  movieModalElement = document.getElementById("movieModal");
+  movieModal = new Modal(movieModalElement);
 });
 
 //this was the prev solution
@@ -190,17 +190,17 @@ const poppingFnc = (movie) => {
     if (!isMovieInList) {
       movies.push(movie);
       localStorage.setItem("watch-list", JSON.stringify(movies));
-      const alertBox=document.getElementById("alert-additional-content-1");
+      const alertBox = document.getElementById("alert-additional-content-1");
       alertBox.classList.remove("hidden");
       setTimeout(() => {
-      alertBox.classList.add("hidden");
-    }, 2000);
+        alertBox.classList.add("hidden");
+      }, 2000);
     } else {
-      const alertBox=document.getElementById("alert-additional-content-2");
+      const alertBox = document.getElementById("alert-additional-content-2");
       alertBox.classList.remove("hidden");
       setTimeout(() => {
-      alertBox.classList.add("hidden");
-    }, 2000);
+        alertBox.classList.add("hidden");
+      }, 2000);
     }
   });
 
@@ -364,8 +364,6 @@ function renderStars(score, outOf = 10) {
 //   }
 // });
 
-
-
 // const filterMovies = () => {
 // generate a random page number between 1 and 72
 const randomPage = Math.floor(Math.random() * 72) + 1;
@@ -459,17 +457,19 @@ async function classifyGenre() {
 
 Valid Inputs:
 
-Emotional states or needs (e.g., "I feel lonely," "I need a laugh," "I want to relax").
+Words relating to Health Status (e.g "I am healthy", "I am alive", "Dying" and so on.)
 
-Movie-related keywords or phrases (e.g., "space aliens," "crime investigation").
+Words relating to Emotional states or needs (e.g., "I feel lonely," "I need a laugh," "I want to relax").
+
+Words relating to Movie-related keywords or phrases (e.g., "space aliens," "crime investigation").
 
 Invalid Inputs:
 
-Contains numbers, special characters (e.g., *, $), or random patterns.
+Words containing numbers, special characters (e.g., *, $), or random patterns.
 
-Unrelated topics (e.g.,"input", "urinate," "how to cook").
+Words with unrelated topics (e.g.,"input", "urinate," "how to cook").
 
-Gibberish or ambiguous phrases (e.g., "asdfg").
+Words relating to gibberish or ambiguous phrases (e.g., "asdfg").
 
 Genre Mapping Rules:
 
