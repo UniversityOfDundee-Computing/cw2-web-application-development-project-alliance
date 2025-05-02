@@ -33,7 +33,7 @@ Easily bookmark and save movies to your personal favorites list for later viewin
 
 - **HTML** – Structure and layout of the web pages  
 - **CSS** – Styling and visual design  
-- **Bootstrap** – Responsive framework for layout and components  
+- **TailwindCSS** – Responsive framework for layout and components  
 - **JavaScript** – Interactivity and logic  
 - **Gemini API** – User input analyzer
 - **TMDB API** – Movie data and metadata 
