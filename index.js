@@ -102,12 +102,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.querySelector(".onkey");
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      classifyGenre();
+    }
+  });
+});
+
 const container = document.getElementById("buttonContainer");
 container.innerHTML="";
 
-const movieModalElement = document.getElementById("movieModal");
+let movieModalElement;
+let movieModal;
 
-const movieModal = new Modal(movieModalElement);
+document.addEventListener("DOMContentLoaded", () => {
+ movieModalElement = document.getElementById("movieModal");
+ movieModal = new Modal(movieModalElement);
+});
+
+//this was the prev solution
+// const movieModalElement = document.getElementById("movieModal");
+
+// const movieModal = new Modal(movieModalElement);
 
 //removing backdrop process
 const cleanupModal = () => {
@@ -148,12 +166,12 @@ document.querySelectorAll("[data-modal-hide='movieModal']").forEach((btn) => {
 });
 
 //this line for declaring current movie
-let currentMovie = null;
+// let currentMovie = null;
 
 const poppingFnc = (movie) => {
   // Set title, image, and overview
   // console.log(movie);
-  currentMovie=movie;
+  // currentMovie=movie;
 
   // Get the button and heart icon
   const favoriteButton = document.getElementById("favoriteButton");
@@ -271,80 +289,80 @@ function renderStars(score, outOf = 10) {
   ratingContainer.appendChild(text);
 }
 
-//thats for providing streaming websites
-const WATCHMODE_API_KEY = "sMtObfkLw5BhQ4qYhY0rcOBXJmSN0tINpsMW23w3";
-async function fetchStreamingSources(movieTitle, year) {
-  try {
-    // Step 1: Search for the movie on Watchmode
-    const searchUrl = `https://api.watchmode.com/v1/search/?apiKey=${WATCHMODE_API_KEY}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`;
-    const searchRes = await fetch(searchUrl);
-    const searchData = await searchRes.json();
+// //thats for providing streaming websites
+// const WATCHMODE_API_KEY = "sMtObfkLw5BhQ4qYhY0rcOBXJmSN0tINpsMW23w3";
+// async function fetchStreamingSources(movieTitle, year) {
+//   try {
+//     // Step 1: Search for the movie on Watchmode
+//     const searchUrl = `https://api.watchmode.com/v1/search/?apiKey=${WATCHMODE_API_KEY}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`;
+//     const searchRes = await fetch(searchUrl);
+//     const searchData = await searchRes.json();
 
-    const movie = searchData.title_results.find(m => m.type === "movie" && (!year || m.year === year));
-    if (!movie) {
-      throw new Error("Movie not found on Watchmode.");
-    }
+//     const movie = searchData.title_results.find(m => m.type === "movie" && (!year || m.year === year));
+//     if (!movie) {
+//       throw new Error("Movie not found on Watchmode.");
+//     }
 
-    // Step 2: Get sources by Watchmode ID
-    const sourcesUrl = `https://api.watchmode.com/v1/title/${movie.id}/sources/?apiKey=${WATCHMODE_API_KEY}`;
-    const sourcesRes = await fetch(sourcesUrl);
-    const sources = await sourcesRes.json();
+//     // Step 2: Get sources by Watchmode ID
+//     const sourcesUrl = `https://api.watchmode.com/v1/title/${movie.id}/sources/?apiKey=${WATCHMODE_API_KEY}`;
+//     const sourcesRes = await fetch(sourcesUrl);
+//     const sources = await sourcesRes.json();
 
-    // Filter for US and subscription types
-    const filtered = sources.filter(src =>
-      src.region === "US" &&
-      (src.type === "sub" || src.type === "free" || src.type === "buy" || src.type === "rent")
-    );
+//     // Filter for US and subscription types
+//     const filtered = sources.filter(src =>
+//       src.region === "US" &&
+//       (src.type === "sub" || src.type === "free" || src.type === "buy" || src.type === "rent")
+//     );
 
-    const dropdown = document.getElementById("providersDropdown");
-    dropdown.innerHTML = "";
+//     const dropdown = document.getElementById("providersDropdown");
+//     dropdown.innerHTML = "";
 
-    if (filtered.length === 0) {
-      dropdown.innerHTML = "<p class='text-sm text-gray-500'>No providers found.</p>";
-      return;
-    }
+//     if (filtered.length === 0) {
+//       dropdown.innerHTML = "<p class='text-sm text-gray-500'>No providers found.</p>";
+//       return;
+//     }
 
-    filtered.forEach(provider => {
-      const item = document.createElement("a");
-      item.href = provider.web_url;
-      item.target = "_blank";
-      item.className = "flex items-center gap-3 hover:bg-gray-100 p-2 rounded";
+//     filtered.forEach(provider => {
+//       const item = document.createElement("a");
+//       item.href = provider.web_url;
+//       item.target = "_blank";
+//       item.className = "flex items-center gap-3 hover:bg-gray-100 p-2 rounded";
 
-      const icon = document.createElement("img");
-      icon.src = provider.logo_100px;
-      icon.alt = provider.name;
-      icon.className = "w-6 h-6";
+//       const icon = document.createElement("img");
+//       icon.src = provider.logo_100px;
+//       icon.alt = provider.name;
+//       icon.className = "w-6 h-6";
 
-      const name = document.createElement("span");
-      name.textContent = provider.name;
-      name.className = "text-sm text-gray-800";
+//       const name = document.createElement("span");
+//       name.textContent = provider.name;
+//       name.className = "text-sm text-gray-800";
 
-      item.appendChild(icon);
-      item.appendChild(name);
-      dropdown.appendChild(item);
-    });
+//       item.appendChild(icon);
+//       item.appendChild(name);
+//       dropdown.appendChild(item);
+//     });
 
-  } catch (error) {
-    console.error("Watchmode error:", error);
-    document.getElementById("providersDropdown").innerHTML = "<p class='text-sm text-red-500'>Error fetching sources.</p>";
-  }
-}
+//   } catch (error) {
+//     console.error("Watchmode error:", error);
+//     document.getElementById("providersDropdown").innerHTML = "<p class='text-sm text-red-500'>Error fetching sources.</p>";
+//   }
+// }
 
-document.getElementById("watchModeBtn").addEventListener("click", () => {
-  const dropdown = document.getElementById("providersDropdown");
-  const isHidden = dropdown.classList.contains("hidden");
+// document.getElementById("watchModeBtn").addEventListener("click", () => {
+//   const dropdown = document.getElementById("providersDropdown");
+//   const isHidden = dropdown.classList.contains("hidden");
 
-  if (isHidden) {
-    // Example: dynamically pass current movie name and year
-    fetchStreamingSources(currentMovie.title, currentMovie.year);
-   const streamlist =  dropdown.classList.remove("hidden");
-    setTimeout(() => {
-    streamlist.classList.add("hidden");
-    }, 2000);
-  } else {
-    dropdown.classList.add("hidden");
-  }
-});
+//   if (isHidden) {
+//     // Example: dynamically pass current movie name and year
+//     fetchStreamingSources(currentMovie.title, currentMovie.year);
+//    const streamlist =  dropdown.classList.remove("hidden");
+//     setTimeout(() => {
+//     streamlist.classList.add("hidden");
+//     }, 2000);
+//   } else {
+//     dropdown.classList.add("hidden");
+//   }
+// });
 
 
 
@@ -360,7 +378,7 @@ const reg = moviesEmojis.find((g) => g.id === Number(genre));
 
 document.getElementById(
   "currentMovieList"
-).textContent = `These are the list of ${reg.name} ${reg.emoji} movies`;
+).textContent = `List of ${reg.name} ${reg.emoji} Movies`;
 // console.log(reg);
 
 const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=${randomPage}&sort_by=popularity.desc&with_genres=${Number(
@@ -431,8 +449,7 @@ async function classifyGenre() {
 
   // 🛑 If input is empty, show message and return early
   if (!input) {
-    document.getElementById("result").innerText =
-      "❗ Please enter something first!";
+    showError("❗ Please enter something first!");
     return;
   }
 
@@ -450,7 +467,7 @@ Invalid Inputs:
 
 Contains numbers, special characters (e.g., *, $), or random patterns.
 
-Unrelated topics (e.g., "urinate," "how to cook").
+Unrelated topics (e.g.,"input", "urinate," "how to cook").
 
 Gibberish or ambiguous phrases (e.g., "asdfg").
 
@@ -537,11 +554,11 @@ Output: [Genre ID or "Invalid input"]`;
       data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
     document.getElementById("result").innerText = "🎭 Genre: " + text.trim();
 
-    if (text.trim() === "Invalid input") {
-      document.getElementById("result").innerText =
-        "❌ Please enter a valid mood or keyword!";
+    if (isNaN(text.trim()) || text.trim() === "") {
+      showError("❌ Please enter a valid mood or keyword!");
       return;
     } else {
+      showError("🎭 Genre: " + text.trim());
       localStorage.setItem("genre", text.trim());
       window.location.href = "index.html";
     }
@@ -557,3 +574,13 @@ const goBackBtn = document.getElementById("goBackBtn");
 goBackBtn.addEventListener("click", () => {
   window.location.href = "welcome.html";
 });
+
+function showError(message) {
+  const el = document.getElementById("result");
+  el.classList.add("bg-indigo-500");
+  el.textContent = message;
+  setTimeout(() => {
+    el.textContent = "";
+    el.classList.remove("bg-indigo-500");
+  }, 3000);
+}
