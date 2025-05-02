@@ -1,0 +1,50 @@
+Meeting Minutes – Day 1
+Project Name: Moodvie – Mood-Based Movie Search Application
+Date: 26-04-2025
+Group Name: Alliances
+Attendees: 4 Group Members
+Project Status: In Progress
+
+
+ 1. Meeting Objective
+
+The primary objective of this meeting was to align all team members on the vision and direction of the project. The team discussed the nature and purpose of the project, clarified the deliverables, determined the scope of work, and assigned individual responsibilities. Additionally, members collaborated on selecting the tools, technologies, and APIs that would be foundational for development.
+
+
+ 2. Project Summary
+
+After a collaborative brainstorming session, the group finalized the concept of Moodvie, a web application designed to recommend movies based on a user’s current emotional state. The goal is to improve the entertainment selection experience by tailoring suggestions through mood recognition. The platform will not only recommend movies but also provide trailers and key metadata to help users make informed viewing decisions. The team aims for an intuitive, visually appealing user interface that engages users through personalization.
+
+
+ 3. Technologies – Phase 1
+
+The team identified several key technologies and tools for the initial phase of the project:
+
+* TMDb API (The Movie Database API):
+  Chosen as the primary source for movie data, the TMDb API will provide access to extensive metadata including titles, genres, overviews, posters, trailers, and ratings.
+
+* CSS Framework:
+  The group is evaluating teh use of Tailwind CSS as framework to develop a responsive and modern user interface.
+
+* Mood Detection (Exploratory Phase):
+  The team began discussing possible approaches to mood detection, which may involve user input via a mood selector, emoji interface, or integrating a sentiment analysis module and another API.
+
+
+ 4. Role Distribution
+
+* Initial task distribution was agreed upon as follows:
+
+* Project Management/Coordination: Overseeing timeline, task tracking, and communication.
+
+* Frontend Development: Designing and building the user interface.
+
+* Backend/API Integration: Managing integration with the TMDb API and other external services.
+
+* Mood Logic Development: Developing mood input and analysis logic for mood-based movie recommendations.
+
+
+ 5. Next Steps
+* Set up GitHub repository for code collaboration
+* Finalize the use of an External API for mood input analysis and user flow.
+* Create TMDb API keys and test basic data retrieval.
+* Schedule next meeting to review prototype wireframes and initial API integration.

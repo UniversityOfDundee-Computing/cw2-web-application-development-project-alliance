@@ -1,0 +1,36 @@
+Meeting Day 2
+Project Name: Moodvie – Mood-Based Movie Search Application
+Date: 27-04-2025
+Group Name: Alliances
+Attendees: 4 Group Members
+Project Status: In Progress
+
+1. Technologies – Part 2
+
+Upon further discussion and development, the team agreed to reassign API roles:
+
+* API 1: Gemini API – This API processes and analyzes the user's mood-based input and returns a matching genre.
+
+* API 2: TMDb API – Now used to fetch movie data based on the genre output from Gemini.
+
+This new structure improved the accuracy and relevance of mood-to-movie mapping.
+
+Development Stack:
+
+- HTML
+
+- CSS
+
+- JavaScript
+
+- Tailwind CSS
+
+2. Role Assignments
+
+To streamline workflow, roles were assigned as follows:
+
+* Benjamin, Yahya, Daniel: Frontend development (UI/UX design)
+
+* Benjamin, Yahya, Daniel: Backend integration and API management
+
+* Daniel, Yemi: Project coordination, testing, and documentation

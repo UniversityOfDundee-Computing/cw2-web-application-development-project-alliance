@@ -1,0 +1,32 @@
+Meeting Day 3
+Project Name: Moodvie – Mood-Based Movie Search Application
+Date: 28-04-2025
+Group Name: Alliances
+Attendees: 4 Group Members
+Project Status: In Progress
+
+1. Challenges
+
+The team encountered several challenges:
+
+* Discrepant data returned from the TMDb API
+
+* Difficulty implementing the Gemini API with proper prompt to analyse user input
+
+* Disagreements during GitHub pushes
+
+* Difficulty mapping moods to appropriate movie genres
+
+* Layout inconsistencies across different screen sizes
+
+Resolution:
+
+These issues were resolved through frequent team meetings, code reviews, and improved collaboration. The introduction of the Gemini API (as API 1) significantly improved the mood-to-genre mapping process.
+
+2. Outcomes & Next Steps
+
+* Finalized project structure and selected technologies
+
+* Resolved early-stage development hurdles
+
+* Final phase to focus on interface refinement, review, testing, and full implementation
