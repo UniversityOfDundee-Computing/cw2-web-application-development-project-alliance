@@ -4,6 +4,17 @@
 <img src="image/moodvielogo2.png"        alt="moodvielogo" width="300" justify-item-center>
 </p>
 
+# Video Guide on how to use MoodVie
+
+`Just click the image below and you'll be taken to YouTube where you'll enjoy a safe ride through MoodVie Island`
+[![Watch the video](https://img.youtube.com/vi/l_LmjLYzIp8/maxresdefault.jpg)](https://youtu.be/l_LmjLYzIp8?si=HphLQA-GDs_Nzxz-)
+
+## 📄 Application Idea Document
+
+[Click here to view the full proposal (PDF)](meeting/application-idea.pdf)
+
+<br>
+
 # <img src="image/moodvielogo2.png"        alt="moodvielogo" width="30"> MoodVie – Mood-Based Movie Discovery App
 
 MoodVie is a mood-based movie search engine designed to help users explore films that match how they're feeling. Whether you're sad, happy, adventurous, in the mood for horror, or just need a good laugh, MoodVie has the perfect recommendation waiting for you. Sit back, relax, and don’t forget the popcorn!
