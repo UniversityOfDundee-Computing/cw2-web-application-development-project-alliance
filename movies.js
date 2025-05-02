@@ -1,3 +1,4 @@
+//List of movie genres and emojis
 const moviesEmojis = [
   { id: 28, name: "Action", emoji: "💥" },
   { id: 12, name: "Adventure", emoji: "🧭" },
@@ -99,15 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     },
     detectRetina: true, // Ensure proper scaling for retina displays
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const el = document.querySelector(".onkey");
-  el.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      classifyGenre();
-    }
   });
 });
 
@@ -417,8 +409,10 @@ fetch(url, options)
 
       const movieImage = document.createElement("img");
       movieImage.classList.add(
-        "w-[220px]",
-        "h-[330px]",
+        "sm:w-[220px]",
+        "w-[190px]",
+        "sm:h-[330px]",
+        "h-[280px]",
         "rounded-lg",
         "cursor-pointer"
       );
@@ -457,13 +451,17 @@ async function classifyGenre() {
 
 Valid Inputs:
 
+Words relating to high energy (e.g "out of this world" and so on)
+
 Words relating to Health Status (e.g "I am healthy", "I am alive", "Dying" and so on.)
 
 Words relating to Emotional states or needs (e.g., "I feel lonely," "I need a laugh," "I want to relax").
 
-Words relating to Movie-related keywords or phrases (e.g., "space aliens," "crime investigation").
+Words relating to Movie-related keywords or phrases (e.g., "space", "space aliens," "crime investigation").
 
 Invalid Inputs:
+
+Words containing abusive or inappropriate words (like "sex", "horny", "fuck" and so on)
 
 Words containing numbers, special characters (e.g., *, $), or random patterns.
 

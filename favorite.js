@@ -80,13 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 let movieModalElement;
 let movieModal;
 
 document.addEventListener("DOMContentLoaded", () => {
- movieModalElement = document.getElementById("movieModal");
- movieModal = new Modal(movieModalElement);
+  movieModalElement = document.getElementById("movieModal");
+  movieModal = new Modal(movieModalElement);
 });
 
 //removing backdrop process
@@ -280,8 +279,6 @@ if (watchListMovies.length === 0) {
     favContainer.appendChild(favMovieCard);
 
     favMovieImage.addEventListener("click", () => {
-      // console.log(`Clicked on: ${movie.title}`);
-      // You can call another function here if you want to show more info or do something fancy
       poppingFnc_fav(movie);
     });
   });
