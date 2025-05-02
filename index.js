@@ -20,7 +20,7 @@ const moviesEmojis = [
   { id: 37, name: "Western", emoji: "🤠" },
 ];
 
-// particles.js configuration
+// particles config
 document.addEventListener("DOMContentLoaded", function () {
   tsParticles.load("tsparticles", {
     background: {
@@ -112,10 +112,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const container = document.getElementById("buttonContainer");
-container.innerHTML = "";
+container.innerHTML="";
 
-const movieModalElement = document.getElementById("movieModal");
-const movieModal = new Modal(movieModalElement);
+let movieModalElement;
+let movieModal;
+
+document.addEventListener("DOMContentLoaded", () => {
+ movieModalElement = document.getElementById("movieModal");
+ movieModal = new Modal(movieModalElement);
+});
+
+//this was the prev solution
+// const movieModalElement = document.getElementById("movieModal");
+
+// const movieModal = new Modal(movieModalElement);
 
 //removing backdrop process
 const cleanupModal = () => {
@@ -155,20 +165,20 @@ document.querySelectorAll("[data-modal-hide='movieModal']").forEach((btn) => {
   });
 });
 
+//this line for declaring current movie
+// let currentMovie = null;
+
 const poppingFnc = (movie) => {
   // Set title, image, and overview
-  console.log(movie);
+  // console.log(movie);
+  // currentMovie=movie;
 
   // Get the button and heart icon
   const favoriteButton = document.getElementById("favoriteButton");
-  const heartIcon = document.getElementById("heartIcon");
 
   // Remove old click handlers
   const newFavoriteButton = favoriteButton.cloneNode(true);
   favoriteButton.parentNode.replaceChild(newFavoriteButton, favoriteButton);
-
-  // Always set white heart initially
-  heartIcon.innerHTML = "🤍"; // White heart emoji
 
   // Add movie to local storage when clicked
   newFavoriteButton.addEventListener("click", () => {
@@ -180,9 +190,17 @@ const poppingFnc = (movie) => {
     if (!isMovieInList) {
       movies.push(movie);
       localStorage.setItem("watch-list", JSON.stringify(movies));
-      alert("Movie added to your watch list!");
+      const alertBox=document.getElementById("alert-additional-content-1");
+      alertBox.classList.remove("hidden");
+      setTimeout(() => {
+      alertBox.classList.add("hidden");
+    }, 2000);
     } else {
-      alert("Movie already in your watch list!");
+      const alertBox=document.getElementById("alert-additional-content-2");
+      alertBox.classList.remove("hidden");
+      setTimeout(() => {
+      alertBox.classList.add("hidden");
+    }, 2000);
     }
   });
 
@@ -270,6 +288,83 @@ function renderStars(score, outOf = 10) {
   text.textContent = `${score}/${outOf}`;
   ratingContainer.appendChild(text);
 }
+
+// //thats for providing streaming websites
+// const WATCHMODE_API_KEY = "sMtObfkLw5BhQ4qYhY0rcOBXJmSN0tINpsMW23w3";
+// async function fetchStreamingSources(movieTitle, year) {
+//   try {
+//     // Step 1: Search for the movie on Watchmode
+//     const searchUrl = `https://api.watchmode.com/v1/search/?apiKey=${WATCHMODE_API_KEY}&search_field=name&search_value=${encodeURIComponent(movieTitle)}`;
+//     const searchRes = await fetch(searchUrl);
+//     const searchData = await searchRes.json();
+
+//     const movie = searchData.title_results.find(m => m.type === "movie" && (!year || m.year === year));
+//     if (!movie) {
+//       throw new Error("Movie not found on Watchmode.");
+//     }
+
+//     // Step 2: Get sources by Watchmode ID
+//     const sourcesUrl = `https://api.watchmode.com/v1/title/${movie.id}/sources/?apiKey=${WATCHMODE_API_KEY}`;
+//     const sourcesRes = await fetch(sourcesUrl);
+//     const sources = await sourcesRes.json();
+
+//     // Filter for US and subscription types
+//     const filtered = sources.filter(src =>
+//       src.region === "US" &&
+//       (src.type === "sub" || src.type === "free" || src.type === "buy" || src.type === "rent")
+//     );
+
+//     const dropdown = document.getElementById("providersDropdown");
+//     dropdown.innerHTML = "";
+
+//     if (filtered.length === 0) {
+//       dropdown.innerHTML = "<p class='text-sm text-gray-500'>No providers found.</p>";
+//       return;
+//     }
+
+//     filtered.forEach(provider => {
+//       const item = document.createElement("a");
+//       item.href = provider.web_url;
+//       item.target = "_blank";
+//       item.className = "flex items-center gap-3 hover:bg-gray-100 p-2 rounded";
+
+//       const icon = document.createElement("img");
+//       icon.src = provider.logo_100px;
+//       icon.alt = provider.name;
+//       icon.className = "w-6 h-6";
+
+//       const name = document.createElement("span");
+//       name.textContent = provider.name;
+//       name.className = "text-sm text-gray-800";
+
+//       item.appendChild(icon);
+//       item.appendChild(name);
+//       dropdown.appendChild(item);
+//     });
+
+//   } catch (error) {
+//     console.error("Watchmode error:", error);
+//     document.getElementById("providersDropdown").innerHTML = "<p class='text-sm text-red-500'>Error fetching sources.</p>";
+//   }
+// }
+
+// document.getElementById("watchModeBtn").addEventListener("click", () => {
+//   const dropdown = document.getElementById("providersDropdown");
+//   const isHidden = dropdown.classList.contains("hidden");
+
+//   if (isHidden) {
+//     // Example: dynamically pass current movie name and year
+//     fetchStreamingSources(currentMovie.title, currentMovie.year);
+//    const streamlist =  dropdown.classList.remove("hidden");
+//     setTimeout(() => {
+//     streamlist.classList.add("hidden");
+//     }, 2000);
+//   } else {
+//     dropdown.classList.add("hidden");
+//   }
+// });
+
+
 
 // const filterMovies = () => {
 // generate a random page number between 1 and 72
