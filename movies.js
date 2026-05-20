@@ -531,7 +531,7 @@ Output: [Genre ID or "Invalid input"]`;
     // api 1
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" +
-        "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc",
+        "AIzaSyDeZpADHKjyim1V8UylAUlcQaFIOB3EAGQ",
       {
         method: "POST",
         headers: {
