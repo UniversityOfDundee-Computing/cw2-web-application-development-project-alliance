@@ -434,7 +434,7 @@ fetch(url, options)
   .catch((err) => console.error(err));
 // };
 
-const API_KEY = "AIzaSyB1wDLrrcd602tpIiMeI035IEMordsWrqc";
+const API_KEY = "AIzaSyDeZpADHKjyim1V8UylAUlcQaFIOB3EAGQ";
 
 async function classifyGenre() {
   const input = document.getElementById("searchInput").value;
